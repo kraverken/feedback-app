@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import FeedbackItem from "./FeedbackItem";
 
-function FeedbackList({ feedback }) {
+function FeedbackList({ feedback, handleDeleteforApp }) {
   // We can also pass the prop name instead of props here
   //   console.log(props.feedback);
   if (!feedback || feedback.length === 0) {
@@ -11,7 +11,11 @@ function FeedbackList({ feedback }) {
   return (
     <div className="feedback-list">
       {feedback.map((item) => (
-        <FeedbackItem key={item.id} item={item} />
+        <FeedbackItem
+          key={item.id}
+          item={item}
+          handleDeleteforlist={handleDeleteforApp}
+        />
       ))}
     </div>
   );
