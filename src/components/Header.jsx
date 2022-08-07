@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Header(props) {
+function Header({ text, bgColor, textColor }) {
   const headerStyles = {
-    backgroundColor: props.bgColor,
-    color: props.textColor,
-    // inJS style
-  };
+    backgroundColor: bgColor,
+    color: textColor,
+  }; //in a variable style
   return (
     <header style={headerStyles}>
       {/*or do like* {
@@ -15,7 +14,7 @@ function Header(props) {
         inline style
     }*/}
       <div className="container">
-        <h2>{props.text}</h2>
+        <h2>{text}</h2>
       </div>
     </header>
   );
