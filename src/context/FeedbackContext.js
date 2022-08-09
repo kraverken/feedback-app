@@ -1,16 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import FeedbackData from "../data/FeedbackData";
 
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [feedback, setFeedback] = useState([]);
+  const [feedback, setFeedback] = useState(FeedbackData);
   const [feedbackEdit, setFeedbackEdit] = useState({ item: {}, edit: false });
-
-  useEffect(() => {
-    fetchFeedback();
-  }, []); // run only once on load
 
   //   Fetch Feedback
   const addFeedback = (newFeedback) => {
