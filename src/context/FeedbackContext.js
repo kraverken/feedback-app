@@ -6,8 +6,8 @@ const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
   const [feedback, setFeedback] = useState(FeedbackData);
-
   const [feedbackEdit, setFeedbackEdit] = useState({ item: {}, edit: false });
+
   const addFeedback = (newFeedback) => {
     newFeedback.id = uuidv4();
     setFeedback([newFeedback, ...feedback]); //spread operator stores previous value
@@ -31,7 +31,8 @@ export const FeedbackProvider = ({ children }) => {
         feedback,
         deleteFeedback,
         addFeedback,
-        editFeedback,
+        editFeedback, //function
+        feedbackEdit, //state
       }}
     >
       {children}
