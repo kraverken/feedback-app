@@ -10,7 +10,8 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");
 
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
 
   useEffect(() => {
     if (feedbackEdit.edit === true) {
@@ -20,6 +21,7 @@ function FeedbackForm() {
     }
   }, [feedbackEdit]);
   //used as a callback function whatever we put inside the [](array of dependencies) runs when there is change if emty then runs on component load
+
   const handleTextChange = (e) => {
     if (text === "") {
       setBtnDisabled(true);
@@ -41,8 +43,11 @@ function FeedbackForm() {
         text, // Shortcut to say text:text, rating:rating
         rating,
       };
-
-      addFeedback(newFeedback);
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        addFeedback(newFeedback);
+      }
       setText("");
     }
   };
