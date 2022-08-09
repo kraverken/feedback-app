@@ -8,6 +8,7 @@ import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
 import AboutPage from "./pages/AboutPage";
 import AboutIconLink from "./components/AboutIconLink";
+import { FeedbackProvider } from "./context/FeedbackContext";
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData); // app level state accessed in feedbacklist
@@ -24,30 +25,32 @@ function App() {
   };
   return (
     <>
-      <Router>
-        <Header />
-        <div className="container">
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <>
-                  <FeedbackForm handleAdd={addFeedback} />
-                  <FeedbackStats feedback={feedback} />
-                  {/* feedback prop={feedback state} */}
-                  <FeedbackList
-                    feedback={feedback}
-                    handleDeleteforApp={deleteFeedback}
-                  />
-                </>
-              }
-            ></Route>
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-        </div>
-        <AboutIconLink />
-      </Router>
+      <FeedbackProvider>
+        <Router>
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <>
+                    <FeedbackForm handleAdd={addFeedback} />
+                    <FeedbackStats feedback={feedback} />
+                    {/* feedback prop={feedback state} */}
+                    <FeedbackList
+                      feedback={feedback}
+                      handleDeleteforApp={deleteFeedback}
+                    />
+                  </>
+                }
+              ></Route>
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </div>
+          <AboutIconLink />
+        </Router>
+      </FeedbackProvider>
     </>
   );
 }
