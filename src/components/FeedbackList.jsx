@@ -1,11 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
-import PropTypes from "prop-types";
+import { useContext } from "react";
 import FeedbackItem from "./FeedbackItem";
+import FeedbackContext from "../context/FeedbackContext";
 
-function FeedbackList({ feedback, handleDeleteforApp }) {
-  // We can also pass the prop name instead of props here
-  //   console.log(props.feedback);
+function FeedbackList() {
+  const { feedback } = useContext(FeedbackContext);
+  // now there is no need to pass feedback as a prop we can use UseContext to get thet feedback from FeedbackContext.js const propnametoget = usecontext(Fromwheretoget)
+
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet </p>;
   }
@@ -19,26 +20,12 @@ function FeedbackList({ feedback, handleDeleteforApp }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <FeedbackItem
-              key={item.id}
-              item={item}
-              handleDeleteforlist={handleDeleteforApp}
-            />
+            <FeedbackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>
     </div>
   );
 }
-
-FeedbackList.propTypes = {
-  feedback: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      rating: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    })
-  ),
-};
 
 export default FeedbackList;
